@@ -10,17 +10,19 @@ class ExtendedLog extends Plugin
 var initi = itemManage.initItems;
 itemManage.initItems = function(){
 	initi();
-	$('.item .less').unbind('click').click(function(){
+	$('.item .less,.item .message.minor').hide();
+	$('.item .more').show().css({clear: 'both', marginLeft: '40px', fontWeight: 'bold', width: '100%'});
+	$('.item').click(function(){
 		$('.extendedlog').remove();
-		$(this).parents('.item').after('<div class="extendedlog"><textarea readonly>Loading...</textarea></div>');
+		$(this).after('<div class="extendedlog"><div class="textarea" style="white-space:pre;font-family:consolas,courier new,monospace;border:1px solid #999;padding:20px;margin:20px 0px;max-height:100px;overflow-y:auto;">Loading...</div></div>');
 		$('.extendedlog textarea').resizeable();
 		$.post(
 			'{$url}',
 			{
-				log_id: $('.checkbox input', $(this).parents('.item')).attr('id').match(/\[([0-9]+)\]/)[1]
+				log_id: $('.checkbox input', $(this)).attr('id').match(/\[([0-9]+)\]/)[1]
 			},
 			function(result){
-				$('.extendedlog textarea').val(result)
+				$('.extendedlog .textarea').html(result)
 			}
 		);
 	});
@@ -32,6 +34,10 @@ SCRIPT;
 	function action_auth_ajax_extendedlog($handler)
 	{
 		$log = EventLog::get(array('fetch_fn' => 'get_row', 'id' => $handler->handler_vars['log_id'], 'return_data' => true));
+		if(trim($log->data) == '') {
+			$log->data = 'No additional data was logged.';
+		}
+		echo $log->message . "<hr>\n";
 		echo $log->data;
 	}
 
