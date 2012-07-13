@@ -10,12 +10,12 @@ class ExtendedLog extends Plugin
 var initi = itemManage.initItems;
 itemManage.initItems = function(){
 	initi();
-	$('.item .less,.item .message.minor').hide();
-	$('.item .more').show().css({clear: 'both', marginLeft: '40px', fontWeight: 'bold', width: '100%'});
-	$('.item').click(function(){
+	$('.page-logs .item .less,.item .message.minor').hide();
+	$('.page-logs .item .more').show().css({clear: 'both', marginLeft: '40px', fontWeight: 'bold', width: '100%'});
+	$('.page-logs .item').click(function(){
 		$('.extendedlog').remove();
-		$(this).after('<div class="extendedlog"><div class="textarea" style="white-space:pre;font-family:consolas,courier new,monospace;border:1px solid #999;padding:20px;margin:20px 0px;max-height:100px;overflow-y:auto;">Loading...</div></div>');
-		$('.extendedlog textarea').resizeable();
+		$(this).after('<div class="extendedlog"><div class="textarea" style="white-space:pre;font-family:consolas,courier new,monospace;border:1px solid #999;padding:20px;margin:20px 0px;height:100px;overflow-y:auto;">Loading...</div></div>');
+		$('.extendedlog .textarea').resizeable();
 		$.post(
 			'{$url}',
 			{
