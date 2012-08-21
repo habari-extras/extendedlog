@@ -10,9 +10,9 @@ class ExtendedLog extends Plugin
 var initi = itemManage.initItems;
 itemManage.initItems = function(){
 	initi();
-	$('.page-logs .item .less,.item .message.minor').hide();
-	$('.page-logs .item .more').show().css({clear: 'both', marginLeft: '40px', fontWeight: 'bold', width: '100%'});
-	$('.page-logs .item').click(function(){
+	$('.page-logs .manage .item .less,.page-logs .manage .item .message.minor').hide();
+	$('.page-logs .manage .item .more').show().css({clear: 'both', marginLeft: '40px', fontWeight: 'bold', width: '100%'});
+	$('.page-logs .manage .item').click(function(){
 		$('.extendedlog').remove();
 		$(this).after('<div class="extendedlog"><div class="textarea" style="white-space:pre;font-family:consolas,courier new,monospace;border:1px solid #999;padding:20px;margin:20px 0px;height:100px;overflow-y:auto;">Loading...</div></div>');
 		$('.extendedlog .textarea').resizeable();
