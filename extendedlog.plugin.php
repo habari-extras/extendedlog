@@ -1,5 +1,7 @@
 <?php
 
+namespace Habari;
+
 class ExtendedLog extends Plugin
 {
 	function action_admin_header()
